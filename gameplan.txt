@@ -1,0 +1,39 @@
+regisztrációs felület
+	-animációval felpoppolo inputfieldek?
+	-linearlayout meg másik ha forgatva stb
+	-C felhasználó létrehozása
+
+bejelentkezős felület:
+	-animációval felpoppolo inputfieldek?
+	-authentikáció firebase
+	-felhasználó adatmodell
+	-linearlayout meg másik ha forgatva stb
+
+vásárlás fül:
+	-zöldségek animációval poppolnak fel??
+	-árú adatmodell	
+	-R árúk táblázata
+	-U kosár tartalma
+	-überkömplex firestore lekérdezések
+
+kosár fül:
+	-Kivenni dolgokat a kosárból
+	-Extra darabok? xd
+	-Összeg
+	-Megveszi nem veszi
+	-Ugyanarra a lakcímre amivel regisztráltál-e?? Nem akarom de jó lenne tbh
+
+menü:
+	- menü resource??? + menu inflater
+
+profil:
+	-basic adatok kiírása stb
+	-D - felhasználó törlése
+
+
+
+allinall:
+	-reszponzív :(
+	-intentek használata pl activityk meg fragmentek közötti zsalásra
+	-Lifecyclehook valahova ami nem oncreate (esélyesen ondestroy??)
+
