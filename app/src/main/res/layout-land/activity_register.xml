@@ -33,11 +33,16 @@
         android:id="@+id/editTextTextPostalAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:ems="10"
         android:hint="@string/lakc_m"
         android:inputType="textPostalAddress"
         android:textSize="20sp"
+        />
+    <ProgressBar
+        android:id="@+id/registerProgressBar"
+        android:visibility="gone"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         />
 
     <EditText
@@ -58,10 +63,24 @@
         android:text="@string/regisztr_l_s"
         />
     </TableRow>
+    <TableRow android:gravity="center" android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/toLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ha_m_r_van_fi_kod_akkor_jelentkezz_be_itt"
+            android:textSize="18sp"
+            />
+    </TableRow>
 
-
-
-
-
+    <View
+        android:id="@+id/fadeBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layerType="hardware"
+        android:alpha="0.2"
+        android:visibility="gone"
+        android:background="@color/material_dynamic_secondary20"/>
 
 </TableLayout>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Főoldal"
+        android:icon="@drawable/baseline_home_24"
+        />
+    <item
+        android:id="@+id/shop"
+        android:title="Bolt"
+        android:icon="@drawable/carrot_svgrepo_com"
+        />
+
+    <item
+        android:id="@+id/account"
+        android:title="Profil"
+        android:icon="@drawable/baseline_account_circle_24"
+        />
+    <item
+        android:id="@+id/cart"
+        android:title="Bejelentkezés"
+        android:icon="@drawable/baseline_login_24"
+    />
+</menu>

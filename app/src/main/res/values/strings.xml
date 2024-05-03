@@ -6,7 +6,46 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string-array name="gyumolcszoldsegnevek">
+        <item>banán</item>
+        <item>burgonya</item>
+        <item>fejeskáposzta</item>
+        <item>kapor</item>
+        <item>kígyóuborka</item>
+        <item>lilahagyma</item>
+        <item>narancs</item>
+        <item>paprika</item>
+        <item>paradicsom</item>
+        <item>petrezselyem</item>
+        <item>vöröshagyma</item>
+    </string-array>
+    <integer-array name="gyumocszoldsegarak">
+        <item>200</item>
+        <item>300</item>
+        <item>150</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>100</item>
+        <item>200</item>
+        <item>200</item>
+        <item>100</item>
+        <item>200</item>
+    </integer-array>
+    <string-array name="gyumolcszoldsegmertekegyseg">
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>db</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>db</item>
+    </string-array>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="telefonsz_m">Telefonszám:</string>
@@ -15,4 +54,6 @@
     <string name="e_mail_c_m">E-mail cím:</string>
     <string name="regisztr_l_s">Regisztrálás</string>
     <string name="bejelentkez_s">Bejelentkezés</string>
+    <string name="ha_m_r_van_fi_kod_akkor_jelentkezz_be_itt">Ha már van fiókod akkor jelentkezz be itt!</string>
+    <string name="ha_m_g_nincs_fi_kod_akkor_regisztr_lj_itt">Ha még nincs fiókod, akkor regisztrálj itt.</string>
 </resources>
