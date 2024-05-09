@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends baseActivity {
 
     FirebaseAuth mAuth;
     ProgressBar progressBar;
@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void onCreate(Bundle savedInstanceState) {
+        super.setContentView(R.layout.activity_login);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.loginProgressBar);
         the_fog = findViewById(R.id.fadeBackground);

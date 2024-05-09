@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="12dp"
+        app:fabCradleRoundedCornerRadius="30dp"
+        android:id="@+id/bottomAppBar">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height= "wrap_content"
+            android:id="@+id/bottomNavigationView"
+            android:layout_marginEnd="20dp"
+            app:labelVisibilityMode="labeled"
+            android:background="@android:color/transparent"
+            app:elevation="0dp"
+
+            app:menu="@menu/bottom_menu"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bolt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/carrot_svgrepo_com"
+        app:layout_anchor="@id/bottomAppBar"
+        android:layout_marginBottom="16dp"
+        app:maxImageSize="35dp"
+        app:tint = "@android:color/holo_blue_dark"
+        />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

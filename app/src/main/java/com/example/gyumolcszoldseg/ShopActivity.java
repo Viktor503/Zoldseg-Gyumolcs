@@ -10,7 +10,7 @@ import com.example.gyumolcszoldseg.models.aruModell;
 
 import java.util.ArrayList;
 
-public class ShopActivity extends AppCompatActivity {
+public class ShopActivity extends baseActivity {
 
     ArrayList<aruModell> aruk = new ArrayList<>();
     int[] aruImages = {R.drawable.ban_n,
@@ -27,8 +27,8 @@ public class ShopActivity extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.setContentView(R.layout.activity_shop);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop);
         setupModels();
         RecyclerView recyclerView = findViewById(R.id.shopRecyclerView);
         aru_RecyclerViewAdapter adapter = new aru_RecyclerViewAdapter(this, aruk);

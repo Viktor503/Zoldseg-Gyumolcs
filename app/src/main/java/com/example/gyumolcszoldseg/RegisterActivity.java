@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends baseActivity {
 
     FirebaseAuth mAuth;
     ProgressBar progressBar;
@@ -43,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.setContentView(R.layout.activity_register);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.registerProgressBar);

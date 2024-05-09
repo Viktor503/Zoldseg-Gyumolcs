@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends baseActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     Button logout;
@@ -22,8 +22,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.setContentView(R.layout.activity_profile);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
         logout = findViewById(R.id.buttonLogout);
         email = findViewById(R.id.email);
         telefon = findViewById(R.id.telefon);
