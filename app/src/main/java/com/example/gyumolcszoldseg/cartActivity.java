@@ -6,7 +6,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +26,9 @@ public class cartActivity extends baseActivity {
 
     private com.example.gyumolcszoldseg.models.aruViewModel aruViewModel;
     private ArrayList<aruModell> aruk = new ArrayList<>();
+
+    private NotificationHelper notificationHelper;
+    private AlarmManager alarmManager;
 
     Button deleteCart;
     Button orderCart;
@@ -109,7 +116,13 @@ public class cartActivity extends baseActivity {
             builder.setTitle("Rendelés");
             builder.setMessage("Biztosan leadod a rendelésed?");
             builder.setPositiveButton("Yes", (dialog, which) -> {
-                Toast.makeText(this, "A rendelésed sikeres volt, a futár nemsokára indul.", Toast.LENGTH_SHORT).show();
+
+                StringBuilder s = new StringBuilder();
+                for (aruModell aru: aruk){
+                    s = s.append(aru.getDarab()).append(" ").append(aru.getMertekegyseg()).append(" ").append(aru.getNev()).append("\n");
+                }
+                notificationHelper.send("A rendelésed sikeres volt, a futár nemsokára indul.\nA rendelésed:\n"+s);
+                setAlarmManager();
                 aruViewModel.deleteAll();
             });
             builder.setNegativeButton("No", (dialog, which) -> {
@@ -118,5 +131,16 @@ public class cartActivity extends baseActivity {
             AlertDialog alert = builder.create();
             alert.show();
         });
+
+        notificationHelper = new NotificationHelper(this);
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    }
+
+    private void setAlarmManager(){
+        long arrivaltime = (long) (AlarmManager.INTERVAL_HALF_HOUR*(Math.random()/2.5)+0.8);
+        long triggerTime = System.currentTimeMillis() + arrivaltime;
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
     }
 }
