@@ -30,20 +30,12 @@ public class LoginActivity extends baseActivity {
     TextView passwordin;
 
 
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        }
-    }
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.setContentView(R.layout.activity_login);
         super.onCreate(savedInstanceState);
+        super.highlightElementInToolbar("login");
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.loginProgressBar);
         the_fog = findViewById(R.id.fadeBackground);

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@color/cardview_dark_background">
+    android:background="@android:color/holo_blue_dark">
 
     <View
         android:id="@+id/view"
@@ -90,6 +90,7 @@
         android:id="@+id/aruMinus"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/backgound_whitecircle"
         android:gravity="center"
         android:text="-"
