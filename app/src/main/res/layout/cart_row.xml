@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_dark"
+    android:padding="5dp">
+    >
+
+    <TextView
+        android:id="@+id/kosarAruNev"
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:text="aru neve"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/kosarAruMennyiseg"
+
+        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:text="aru mennyiség"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/kosarAruAr"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:text="aru ára"
+        android:textAlignment="center" />
+</TableRow>

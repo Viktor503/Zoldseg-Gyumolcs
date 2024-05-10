@@ -28,4 +28,8 @@ public class aruViewModel extends AndroidViewModel {
         repository.insert(aru);
     }
 
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
 }

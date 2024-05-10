@@ -99,11 +99,10 @@ public class baseActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /*
         cartbutton.setOnClickListener(v -> {
-            Intent intent = new Intent(baseActivity.this, CartActivity.class);
+            Intent intent = new Intent(baseActivity.this, cartActivity.class);
             startActivity(intent);
-        });*/
+        });
 
 
     }

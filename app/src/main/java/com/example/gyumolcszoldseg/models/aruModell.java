@@ -21,13 +21,7 @@ public class aruModell {
     @ColumnInfo(name = "db")
     int darab;
 
-    @Ignore
-    public aruModell(String nev, String mertekegyseg, int ar, int img) {
-        this.nev = nev;
-        this.mertekegyseg = mertekegyseg;
-        this.ar = ar;
-        this.img = img;
-    }
+
     public aruModell(String nev, String mertekegyseg, int ar, int img, int darab) {
         this.nev = nev;
         this.mertekegyseg = mertekegyseg;

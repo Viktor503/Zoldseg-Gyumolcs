@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gyumolcszoldseg.dao.aruDAO;
@@ -20,23 +19,27 @@ import com.example.gyumolcszoldseg.db.aruRoomdb;
 import com.example.gyumolcszoldseg.models.aruModell;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerViewAdapter.mviewHolder>  {
+public class aruRecyclerViewAdapter extends RecyclerView.Adapter<aruRecyclerViewAdapter.mviewHolder>  {
     Context context;
     ArrayList<aruModell> aruk;
     int lastPosition = -1;
     int firstPosition = 20;
 
 
-    public aru_RecyclerViewAdapter(Context context, ArrayList<aruModell> aruk){
+    public aruRecyclerViewAdapter(Context context, ArrayList<aruModell> aruk){
         this.context = context;
         this.aruk = aruk;
+    }
+    public void setAruk(ArrayList<aruModell> arukuj){
+        aruk = arukuj;
+        notifyDataSetChanged();
+
     }
 
     @NonNull
     @Override
-    public aru_RecyclerViewAdapter.mviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public aruRecyclerViewAdapter.mviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.shop_row, parent, false);
         return new mviewHolder((ViewGroup) view);
@@ -44,12 +47,16 @@ public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerVi
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull aru_RecyclerViewAdapter.mviewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull aruRecyclerViewAdapter.mviewHolder holder, int position) {
         holder.imageView.setImageResource(aruk.get(position).getImg());
         holder.nev.setText(aruk.get(position).getNev());
+        holder.db.setText(String.valueOf(aruk.get(position).getDarab()));
+
+        holder.ar = aruk.get(position).getAr();
+        holder.mertekegyseg = aruk.get(position).getMertekegyseg();
+        holder.arcimke.setText(holder.ar + " Ft/" + holder.mertekegyseg);
 
 
-        holder.arcimke.setText(aruk.get(position).getAr()+" Ft/"+aruk.get(position).getMertekegyseg());
         if(holder.getAdapterPosition() > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left);
             holder.itemView.startAnimation(animation);
@@ -76,6 +83,8 @@ public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerVi
         int ar;
         String mertekegyseg;
         int img;
+
+
         public mviewHolder(@NonNull ViewGroup parent) {
             super(parent);
             imageView = parent.findViewById(R.id.aruKep);
@@ -84,8 +93,6 @@ public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerVi
             plus = parent.findViewById(R.id.aruPlus);
             minus = parent.findViewById(R.id.aruMinus);
             db = parent.findViewById(R.id.aruKosarbandb);
-
-
 
             ar = Integer.parseInt(arcimke.getText().toString().split("/")[0].split(" ")[0]);
             mertekegyseg = arcimke.getText().toString().split("/")[1];
@@ -98,21 +105,27 @@ public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerVi
                     quantity++;
                     addOne addOne = new addOne(aruRoomdb.getInstance(parent.getContext()));
                     addOne.execute(new aruModell(nev.getText().toString(), mertekegyseg, ar, img, quantity));
-                    db.setText(String.valueOf(quantity));
                 }
             });
             minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int quantity = Integer.parseInt(db.getText().toString());
-                    if(quantity > 0){
+                    if(quantity-1 > 0){
                         quantity--;
-                        db.setText(String.valueOf(quantity));
+                        addOne addOne = new addOne(aruRoomdb.getInstance(parent.getContext()));
+                        addOne.execute(new aruModell(nev.getText().toString(), mertekegyseg, ar, img, quantity));
+                    }else{
+                        db.setText("0");
+                        delfromcart delfromcart = new delfromcart(aruRoomdb.getInstance(parent.getContext()));
+                        delfromcart.execute(nev.getText().toString());
                     }
                 }
 
             });
         }
+
+
         private static class addOne extends AsyncTask<aruModell, Void, Void> {
             private aruDAO dao;
 
@@ -124,6 +137,21 @@ public class aru_RecyclerViewAdapter extends RecyclerView.Adapter<aru_RecyclerVi
             @Override
             protected Void doInBackground(aruModell... aruModells) {
                 dao.insert(aruModells[0]);
+                return null;
+            }
+        }
+
+        private static class delfromcart extends AsyncTask<String, Void, Void> {
+            private aruDAO dao;
+
+
+            delfromcart(aruRoomdb db) {
+                this.dao = db.aruModellDAO();
+            }
+
+            @Override()
+            protected Void doInBackground(String... strings) {
+                dao.delete(strings[0]);
                 return null;
             }
         }

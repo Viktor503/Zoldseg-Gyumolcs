@@ -43,4 +43,22 @@ public class aruRepository {
             return null;
         }
     }
+
+    public void deleteAll() {
+        new DeleteAll(this.dao).execute();
+    }
+
+    private static class DeleteAll extends AsyncTask<Void, Void, Void> {
+        private aruDAO mdao;
+
+        DeleteAll(aruDAO dao) {
+            this.mdao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mdao.deleteAll();
+            return null;
+        }
+    }
 }
