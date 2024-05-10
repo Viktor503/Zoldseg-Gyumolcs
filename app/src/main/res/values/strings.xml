@@ -14,37 +14,180 @@
         <item>kígyóuborka</item>
         <item>lilahagyma</item>
         <item>narancs</item>
-        <item>paprika</item>
+        <item>TV paprika</item>
         <item>paradicsom</item>
-        <item>petrezselyem</item>
+        <item>petrezselyem zöld</item>
         <item>vöröshagyma</item>
+        <item>kalifornia paprika</item>
+        <item>újkrumpli</item>
+        <item>petrezselyem gyökér</item>
+        <item>fokhagyma</item>
+        <item>idared alma</item>
+        <item>golden alma</item>
+        <item>starking alma</item>
+        <item>prince alma</item>
+        <item>granny smith alma</item>
+        <item>kaiser körte</item>
+        <item>vilmos körte</item>
+        <item>mazsola szőlő</item>
+        <item>citrom</item>
+        <item>grapefruit</item>
+        <item>mandarin</item>
+        <item>földieper</item>
+        <item>kelkáposzta</item>
+        <item>karfiol</item>
+        <item>lilakáposzta</item>
+        <item>zeller</item>
+        <item>karalábé</item>
+        <item>zöldhagyma</item>
+        <item>póréhagyma</item>
+        <item>gomba</item>
+        <item>jégsaláta</item>
+        <item>spenót</item>
+        <item>rukkola</item>
+        <item>spárga</item>
+        <item>avokádó</item>
+        <item>mangó</item>
+        <item>görögdinnye</item>
+        <item>sárgadinnye</item>
+        <item>brokkoli</item>
+        <item>áfonya</item>
+        <item>málna</item>
+        <item>gyöngybab</item>
+        <item>kokóbab</item>
+        <item>óriásfehérbab</item>
+        <item>pattogatni való kukorica</item>
+        <item>lencse</item>
+        <item>savanyúkáposzta</item>
+        <item>savanyúkáposzta levél</item>
+        <item>csalamádé</item>
+        <item>csemege uborka</item>
+        <item>kovászos uborka</item>
+        <item>alma paprika</item>
+        <item>koktél paradicsom</item>
+        <item>sárgarépa</item>
     </string-array>
     <integer-array name="gyumocszoldsegarak">
-        <item>200</item>
-        <item>300</item>
-        <item>150</item>
-        <item>50</item>
-        <item>100</item>
-        <item>200</item>
-        <item>100</item>
-        <item>200</item>
-        <item>200</item>
-        <item>100</item>
-        <item>200</item>
+        <item>699</item>
+        <item>580</item>
+        <item>450</item>
+        <item>280</item>
+        <item>999</item>
+        <item>980</item>
+        <item>780</item>
+        <item>1500</item>
+        <item>950</item>
+        <item>250</item>
+        <item>580</item>
+        <item>2599</item>
+        <item>980</item>
+        <item>2599</item>
+        <item>3990</item>
+        <item>680</item>
+        <item>680</item>
+        <item>680</item>
+        <item>680</item>
+        <item>980</item>
+        <item>1599</item>
+        <item>1599</item>
+        <item>980</item>
+        <item>980</item>
+        <item>980</item>
+        <item>980</item>
+        <item>2499</item>
+        <item>980</item>
+        <item>1280</item>
+        <item>780</item>
+        <item>390</item>
+        <item>390</item>
+        <item>399</item>
+        <item>639</item>
+        <item>2399</item>
+        <item>750</item>
+        <item>2799</item>
+        <item>980</item>
+        <item>1799</item>
+        <item>980</item>
+        <item>1399</item>
+        <item>980</item>
+        <item>1399</item>
+        <item>1799</item>
+        <item>2999</item>
+        <item>2399</item>
+        <item>1290</item>
+        <item>1990</item>
+        <item>2990</item>
+        <item>1280</item>
+        <item>1499</item>
+        <item>980</item>
+        <item>980</item>
+        <item>1799</item>
+        <item>1799</item>
+        <item>1799</item>
+        <item>1799</item>
+        <item>2999</item>
+        <item>699</item>
     </integer-array>
     <string-array name="gyumolcszoldsegmertekegyseg">
         <item>kg</item>
         <item>kg</item>
         <item>kg</item>
+        <item>csomó</item>
         <item>kg</item>
         <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>csomó</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>doboz(0.5 kg)</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>db</item>
+        <item>db</item>
+        <item>csomó</item>
         <item>db</item>
         <item>kg</item>
         <item>kg</item>
         <item>kg</item>
-        <item>kg</item>
-        <item>kg</item>
+        <item>doboz</item>
+        <item>csomó(0.5 kg)</item>
         <item>db</item>
+        <item>db</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>vödör</item>
+        <item>doboz(125g)</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
     </string-array>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

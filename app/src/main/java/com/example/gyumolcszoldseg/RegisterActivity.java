@@ -12,11 +12,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gyumolcszoldseg.models.userModell;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 public class RegisterActivity extends baseActivity {
 
@@ -30,6 +46,9 @@ public class RegisterActivity extends baseActivity {
     TextView phonein;
     TextView addressin;
 
+    FirebaseFirestore mFirestore;
+    CollectionReference mItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +56,9 @@ public class RegisterActivity extends baseActivity {
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("users");
+
         progressBar = findViewById(R.id.registerProgressBar);
         the_fog = findViewById(R.id.fadeBackground);
         tologin = findViewById(R.id.toLogin);
@@ -78,13 +100,16 @@ public class RegisterActivity extends baseActivity {
                                 progressBar.setVisibility(View.GONE);
                                 the_fog.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
+
+                                    String newpass = BCrypt.hashpw(password, BCrypt.gensalt());
+                                    userModell user = new userModell(email, newpass, address, phone);
+
+                                    mItems.document(email).set(user);
 
                                     Toast.makeText(RegisterActivity.this, "Fiók sikeresen létrehozva.",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);
-
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(RegisterActivity.this, "Probléma történt a regisztráció során.",

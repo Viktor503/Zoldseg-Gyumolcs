@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 
 public class ProfileActivity extends baseActivity {
@@ -20,6 +24,9 @@ public class ProfileActivity extends baseActivity {
     TextView email;
     TextView telefon;
     TextView lakhely;
+
+    FirebaseFirestore mFirestore;
+    CollectionReference mItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,16 @@ public class ProfileActivity extends baseActivity {
         lakhely = findViewById(R.id.lakcim);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("users");
+
+        mItems.document(Objects.requireNonNull(currentUser.getEmail())).get().addOnSuccessListener(documentSnapshot -> {
+            if(documentSnapshot.exists()){
+                telefon.setText(documentSnapshot.getString("phone"));
+                lakhely.setText(documentSnapshot.getString("address"));
+            }
+        });
 
         if(currentUser == null){
             Toast.makeText(ProfileActivity.this, "Először jelentkezz be, hogy megnézd a profilod.",

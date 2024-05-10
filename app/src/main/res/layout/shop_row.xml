@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -25,6 +26,7 @@
         android:id="@+id/aruKep"
         android:layout_width="180dp"
         android:layout_height="100dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -33,12 +35,14 @@
 
     <TextView
         android:id="@+id/aruNev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_width="182dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:text="BANÁN"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/aruPlus"
         app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
@@ -47,27 +51,26 @@
         android:id="@+id/aruArcimke"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="700 PENGŐ/ DB"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/aruNev" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view" />
 
     <TextView
         android:id="@+id/aruPlus"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/backgound_whitecircle"
         android:gravity="center"
         android:text="+"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/aruKosarbandb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toEndOf="@+id/aruArcimke"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -76,20 +79,20 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
 
+        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/aruArcimke"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/aruMinus"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/backgound_whitecircle"
         android:gravity="center"
@@ -97,8 +100,6 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toEndOf="@+id/aruArcimke"
         app:layout_constraintTop_toBottomOf="@+id/aruKosarbandb"
         app:layout_constraintVertical_bias="0.93" />
 

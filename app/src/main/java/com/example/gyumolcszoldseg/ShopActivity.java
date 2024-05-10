@@ -9,18 +9,29 @@ import android.os.Bundle;
 
 import com.example.gyumolcszoldseg.models.aruModell;
 import com.example.gyumolcszoldseg.models.aruViewModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopActivity extends baseActivity {
 
+    private FirebaseFirestore mFirestore;
+    private CollectionReference mItems;
+
     ArrayList<aruModell> aruk = new ArrayList<>();
     ArrayList<aruModell> cart = new ArrayList<>();
     aruViewModel aruViewModel;
 
+    aruRecyclerViewAdapter madapter;
+
     int[] arudb = {};
-    int[] aruImages = {R.drawable.ban_n,
+    int[] aruImages = {
+            R.drawable.ban_n,
             R.drawable.burgonya,
             R.drawable.fejesk_poszta,
             R.drawable.kapor,
@@ -30,7 +41,56 @@ public class ShopActivity extends baseActivity {
             R.drawable.paprika,
             R.drawable.paradicsom,
             R.drawable.petrezselyem,
-            R.drawable.voroshagyma
+            R.drawable.voroshagyma,
+            R.drawable.kaliforniai_paprika,
+            R.drawable.ujkrumpli,
+            R.drawable.petrezselyem_gyoker,
+            R.drawable.fokhagyma,
+            R.drawable.idared_alma,
+            R.drawable.golden_alma,
+            R.drawable.starking_alma,
+            R.drawable.prince_alma,
+            R.drawable.granny_smith_alma,
+            R.drawable.kaiser_korte,
+            R.drawable.vilmos_korte,
+            R.drawable.mazsola_szolo,
+            R.drawable.citrom,
+            R.drawable.grapefruit,
+            R.drawable.mandarin,
+            R.drawable.foldieper,
+            R.drawable.kelkaposzta,
+            R.drawable.karfiol,
+            R.drawable.lilakaposzta,
+            R.drawable.zeller,
+            R.drawable.karalabe,
+            R.drawable.zoldhagyma,
+            R.drawable.porehagyma,
+            R.drawable.gomba,
+            R.drawable.jegsalata,
+            R.drawable.spenot,
+            R.drawable.rukkola,
+            R.drawable.sparga,
+            R.drawable.avokado,
+            R.drawable.mango,
+            R.drawable.gorogdinnye,
+            R.drawable.sargadinnye,
+            R.drawable.brokkoli,
+            R.drawable.afonya,
+            R.drawable.malna,
+            R.drawable.gyongybab,
+            R.drawable.kokobab,
+            R.drawable.orias_feher_bab,
+            R.drawable.pattogtatni_valo_kukorica,
+            R.drawable.lencse,
+            R.drawable.savanyu_kaposzta,
+            R.drawable.savanyukaposzta_level,
+            R.drawable.csalamadejpg,
+            R.drawable.csemege_uborka,
+            R.drawable.kovaszos_uborka,
+            R.drawable.almapaprika,
+            R.drawable.koktelparadicsom,
+            R.drawable.sarga_repa
+
     };
 
     void getdbfromCart(ArrayList<aruModell> cart){
@@ -58,11 +118,13 @@ public class ShopActivity extends baseActivity {
 
         aruViewModel = new ViewModelProvider(this).get(aruViewModel.class);
 
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("aruk");
 
-        setupModels();
+
         RecyclerView recyclerView = findViewById(R.id.shopRecyclerView);
-        aruRecyclerViewAdapter adapter = new aruRecyclerViewAdapter(this, aruk);
-        recyclerView.setAdapter(adapter);
+        madapter = new aruRecyclerViewAdapter(this, aruk);
+        recyclerView.setAdapter(madapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         aruViewModel.getAruk().observe(this, new Observer<List<aruModell>>() {
@@ -70,12 +132,32 @@ public class ShopActivity extends baseActivity {
             public void onChanged(List<aruModell> aruModells) {
                 cart = (ArrayList<aruModell>) aruModells;
                 getdbfromCart(cart);
-                setupModels();
-                adapter.setAruk(aruk);
+                queryData();
+                madapter.setAruk(aruk);
             }
         });
 
 
+    }
+
+    private void queryData(){
+        aruk.clear();
+
+        mItems.orderBy("nev").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
+                try {
+                    aruModell item = new aruModell(doc.getString("nev"),
+                            doc.getString("mertekegyseg"),
+                            doc.getLong("ar").intValue(),
+                            doc.getLong("img").intValue(),
+                            arudb[0]);
+                    aruk.add(item);
+                }catch (Exception e){
+                    System.out.println(doc);
+                }
+            }
+            madapter.notifyDataSetChanged();
+        });
     }
 
     private void setupModels(){
@@ -88,12 +170,13 @@ public class ShopActivity extends baseActivity {
 
         int[] arak = getResources().getIntArray(R.array.gyumocszoldsegarak);
         for (int i = 0; i < nevek.length; i++) {
-            aruk.add(new aruModell(
+            mItems.add(new aruModell(
                     nevek[i],
                     mertekegysegek[i],
                     arak[i],
                     aruImages[i],
                     arudb[i]));
         }
+
     }
 }
