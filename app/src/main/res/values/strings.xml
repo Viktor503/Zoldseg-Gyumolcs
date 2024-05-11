@@ -6,6 +6,12 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string-array name="rendezes">
+        <item>Név szerint növekvő</item>
+        <item>Név szerint csökkenő</item>
+        <item>Ár szerint növekvő</item>
+        <item>Ár szerint csökkenő</item>
+    </string-array>
     <string-array name="gyumolcszoldsegnevek">
         <item>banán</item>
         <item>burgonya</item>

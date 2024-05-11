@@ -12,12 +12,16 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gyumolcszoldseg.models.aruModell;
 import com.example.gyumolcszoldseg.models.aruViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,10 @@ public class cartActivity extends baseActivity {
 
     TextView vegosszeg;
 
+    FirebaseUser currentUser;
+
+
+
     private int osszeg(){
         int osszeg = 0;
         for(aruModell aru: aruk){
@@ -55,12 +63,18 @@ public class cartActivity extends baseActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_down);
+        recyclerView.startAnimation(animation);
+
         deleteCart = findViewById(R.id.deleteCart);
         orderCart = findViewById(R.id.orderCart);
 
         osszKoltseg = findViewById(R.id.osszeskoltseg);
         szallitasidij = findViewById(R.id.szallitasi);
         vegosszeg = findViewById(R.id.vegosszeg);
+        mAuth = FirebaseAuth.getInstance();
+
+        currentUser = mAuth.getCurrentUser();
 
 
         aruViewModel = new ViewModelProvider(this).get(aruViewModel.class);
@@ -117,6 +131,14 @@ public class cartActivity extends baseActivity {
             builder.setTitle("Rendelés");
             builder.setMessage("Biztosan leadod a rendelésed?");
             builder.setPositiveButton("Yes", (dialog, which) -> {
+                if(currentUser == null){
+                    Toast.makeText(this, "Először jelentkezz be, hogy leadhasd a rendelésed.",
+                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
 
                 StringBuilder s = new StringBuilder();
                 for (aruModell aru: aruk){
@@ -144,4 +166,5 @@ public class cartActivity extends baseActivity {
         @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
     }
+
 }

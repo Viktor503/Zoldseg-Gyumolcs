@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,12 +39,19 @@ public class LoginActivity extends baseActivity {
         super.onCreate(savedInstanceState);
         super.highlightElementInToolbar("login");
         mAuth = FirebaseAuth.getInstance();
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomer);
         progressBar = findViewById(R.id.loginProgressBar);
         the_fog = findViewById(R.id.fadeBackground);
         toregister = findViewById(R.id.toRegister);
         loginButton = findViewById(R.id.buttonLogin);
         emailin = findViewById(R.id.editTextTextEmailAddress);
         passwordin = findViewById(R.id.editTextTextPassword);
+
+        emailin.startAnimation(animation);
+        passwordin.startAnimation(animation);
+        loginButton.startAnimation(animation);
+        toregister.startAnimation(animation);
 
 
         toregister.setOnClickListener(new View.OnClickListener() {

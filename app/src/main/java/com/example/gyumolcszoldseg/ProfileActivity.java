@@ -21,6 +21,8 @@ public class ProfileActivity extends baseActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     Button logout;
+
+    Button deleteProfile;
     TextView email;
     TextView telefon;
     TextView lakhely;
@@ -39,6 +41,7 @@ public class ProfileActivity extends baseActivity {
         lakhely = findViewById(R.id.lakcim);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        deleteProfile = findViewById(R.id.buttonDeleteAccount);
 
         mFirestore = FirebaseFirestore.getInstance();
         mItems = mFirestore.collection("users");
@@ -66,6 +69,25 @@ public class ProfileActivity extends baseActivity {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        deleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mItems.document(Objects.requireNonNull(currentUser.getEmail())).delete().addOnSuccessListener(aVoid -> {
+                    Toast.makeText(ProfileActivity.this, "Sikeresen törölted a profilodat.",
+                            Toast.LENGTH_SHORT).show();
+                    currentUser.delete();
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(ProfileActivity.this, "Hiba történt a profil törlése közben.",
+                            Toast.LENGTH_SHORT).show();
+                });
             }
         });
     }

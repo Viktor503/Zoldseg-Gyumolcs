@@ -71,7 +71,7 @@ public class baseActivity extends AppCompatActivity {
 
         loginbutton.setOnClickListener(v -> {
             if (currentUser != null) {
-                Toast.makeText(baseActivity.this, "Már be vagy jelentkezve, ha nagyon be szeretnél jelentkezni, akkor jelentkezz ki előtte.",
+                Toast.makeText(baseActivity.this, "Már be vagy jelentkezve.",
                         Toast.LENGTH_LONG).show();
             }else{
                 Intent intent = new Intent(baseActivity.this, LoginActivity.class);

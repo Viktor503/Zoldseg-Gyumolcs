@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -55,6 +57,8 @@ public class RegisterActivity extends baseActivity {
         super.setContentView(R.layout.activity_register);
         super.onCreate(savedInstanceState);
 
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomer);
+
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mItems = mFirestore.collection("users");
@@ -68,6 +72,13 @@ public class RegisterActivity extends baseActivity {
         phonein = findViewById(R.id.editTextPhone);
         addressin = findViewById(R.id.editTextTextPostalAddress);
 
+        emailin.startAnimation(animation);
+        passwordin.startAnimation(animation);
+        phonein.startAnimation(animation);
+        addressin.startAnimation(animation);
+        registerButton.startAnimation(animation);
+        tologin.startAnimation(animation);
+        tologin.startAnimation(animation);
 
 
         tologin.setOnClickListener(new View.OnClickListener() {

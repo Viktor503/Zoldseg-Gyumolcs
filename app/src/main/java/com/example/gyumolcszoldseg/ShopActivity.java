@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.example.gyumolcszoldseg.models.aruModell;
 import com.example.gyumolcszoldseg.models.aruViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -30,69 +34,71 @@ public class ShopActivity extends baseActivity {
 
     aruRecyclerViewAdapter madapter;
 
-    HashMap<String, Integer> arudb = new HashMap<>();
-    int[] aruImages = {
-            R.drawable.ban_n,
-            R.drawable.burgonya,
-            R.drawable.fejesk_poszta,
-            R.drawable.kapor,
-            R.drawable.k_gy_uborka,
-            R.drawable.lilahagyma,
-            R.drawable.narancs,
-            R.drawable.paprika,
-            R.drawable.paradicsom,
-            R.drawable.petrezselyem,
-            R.drawable.voroshagyma,
-            R.drawable.kaliforniai_paprika,
-            R.drawable.ujkrumpli,
-            R.drawable.petrezselyem_gyoker,
-            R.drawable.fokhagyma,
-            R.drawable.idared_alma,
-            R.drawable.golden_alma,
-            R.drawable.starking_alma,
-            R.drawable.prince_alma,
-            R.drawable.granny_smith_alma,
-            R.drawable.kaiser_korte,
-            R.drawable.vilmos_korte,
-            R.drawable.mazsola_szolo,
-            R.drawable.citrom,
-            R.drawable.grapefruit,
-            R.drawable.mandarin,
-            R.drawable.foldieper,
-            R.drawable.kelkaposzta,
-            R.drawable.karfiol,
-            R.drawable.lilakaposzta,
-            R.drawable.zeller,
-            R.drawable.karalabe,
-            R.drawable.zoldhagyma,
-            R.drawable.porehagyma,
-            R.drawable.gomba,
-            R.drawable.jegsalata,
-            R.drawable.spenot,
-            R.drawable.rukkola,
-            R.drawable.sparga,
-            R.drawable.avokado,
-            R.drawable.mango,
-            R.drawable.gorogdinnye,
-            R.drawable.sargadinnye,
-            R.drawable.brokkoli,
-            R.drawable.afonya,
-            R.drawable.malna,
-            R.drawable.gyongybab,
-            R.drawable.kokobab,
-            R.drawable.orias_feher_bab,
-            R.drawable.pattogtatni_valo_kukorica,
-            R.drawable.lencse,
-            R.drawable.savanyu_kaposzta,
-            R.drawable.savanyukaposzta_level,
-            R.drawable.csalamadejpg,
-            R.drawable.csemege_uborka,
-            R.drawable.kovaszos_uborka,
-            R.drawable.almapaprika,
-            R.drawable.koktelparadicsom,
-            R.drawable.sarga_repa
+    Spinner spinner;
 
-    };
+    int sortby = 0;
+    HashMap<String, Integer> arudb = new HashMap<>();
+    HashMap<String, Integer> aruImages = new HashMap<String, Integer>(){{
+        put("banán",R.drawable.ban_n);
+        put("burgonya",R.drawable.burgonya);
+        put("fejeskáposzta",R.drawable.fejesk_poszta);
+        put("kapor",R.drawable.kapor);
+        put("kígyóuborka",R.drawable.k_gy_uborka);
+        put("lilahagyma",R.drawable.lilahagyma);
+        put("narancs",R.drawable.narancs);
+        put("TV paprika",R.drawable.paprika);
+        put("paradicsom",R.drawable.paradicsom);
+        put("petrezselyem zöld",R.drawable.petrezselyem);
+        put("vöröshagyma",R.drawable.voroshagyma);
+        put("kalifornia paprika",R.drawable.kaliforniai_paprika);
+        put("újkrumpli",R.drawable.ujkrumpli);
+        put("petrezselyem gyökér",R.drawable.petrezselyem_gyoker);
+        put("fokhagyma",R.drawable.fokhagyma);
+        put("idared alma",R.drawable.idared_alma);
+        put("golden alma",R.drawable.golden_alma);
+        put("starking alma",R.drawable.starking_alma);
+        put("prince alma",R.drawable.prince_alma);
+        put("granny smith alma",R.drawable.granny_smith_alma);
+        put("kaiser körte",R.drawable.kaiser_korte);
+        put("vilmos körte",R.drawable.vilmos_korte);
+        put("mazsola szőlő",R.drawable.mazsola_szolo);
+        put("citrom",R.drawable.citrom);
+        put("grapefruit",R.drawable.grapefruit);
+        put("mandarin",R.drawable.mandarin);
+        put("földieper",R.drawable.foldieper);
+        put("kelkáposzta",R.drawable.kelkaposzta);
+        put("karfiol",R.drawable.karfiol);
+        put("lilakáposzta",R.drawable.lilakaposzta);
+        put("zeller",R.drawable.zeller);
+        put("karalábé",R.drawable.karalabe);
+        put("zöldhagyma",R.drawable.zoldhagyma);
+        put("póréhagyma",R.drawable.porehagyma);
+        put("gomba",R.drawable.gomba);
+        put("jégsaláta",R.drawable.jegsalata);
+        put("spenót",R.drawable.spenot);
+        put("rukkola",R.drawable.rukkola);
+        put("spárga",R.drawable.sparga);
+        put("avokádó",R.drawable.avokado);
+        put("mangó",R.drawable.mango);
+        put("görögdinnye",R.drawable.gorogdinnye);
+        put("sárgadinnye",R.drawable.sargadinnye);
+        put("brokkoli",R.drawable.brokkoli);
+        put("áfonya",R.drawable.afonya);
+        put("málna",R.drawable.malna);
+        put("gyöngybab",R.drawable.gyongybab);
+        put("kokóbab",R.drawable.kokobab);
+        put("óriásfehérbab",R.drawable.orias_feher_bab);
+        put("pattogatni való kukorica",R.drawable.pattogtatni_valo_kukorica);
+        put("lencse",R.drawable.lencse);
+        put("savanyúkáposzta",R.drawable.savanyu_kaposzta);
+        put("savanyúkáposzta levél",R.drawable.savanyukaposzta_level);
+        put("csalamádé",R.drawable.csalamadejpg);
+        put("csemege uborka",R.drawable.csemege_uborka);
+        put("kovászos uborka",R.drawable.kovaszos_uborka);
+        put("alma paprika",R.drawable.almapaprika);
+        put("koktél paradicsom",R.drawable.koktelparadicsom);
+        put("sárgarépa",R.drawable.sarga_repa);
+    }};
 
     void getdbfromCart(ArrayList<aruModell> cart){
         String[] nevek = getResources().getStringArray(R.array.gyumolcszoldsegnevek);
@@ -127,11 +133,30 @@ public class ShopActivity extends baseActivity {
         mFirestore = FirebaseFirestore.getInstance();
         mItems = mFirestore.collection("aruk");
 
-
+        spinner = findViewById(R.id.spinner);
         RecyclerView recyclerView = findViewById(R.id.shopRecyclerView);
         madapter = new aruRecyclerViewAdapter(this, aruk);
         recyclerView.setAdapter(madapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                aruk.clear();
+                getdbfromCart(cart);
+                sortby = i;
+                System.out.println("sortby: "+sortby);
+                queryData();
+                madapter.setAruk(aruk);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         aruViewModel.getAruk().observe(this, new Observer<List<aruModell>>() {
             @Override
@@ -148,27 +173,43 @@ public class ShopActivity extends baseActivity {
 
     private void queryData() {
         if (aruk.size() == 0) {
-            mItems.orderBy("nev").get().addOnSuccessListener(queryDocumentSnapshots -> {
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    try {
-                        aruModell item = new aruModell(doc.getString("nev"),
-                                doc.getString("mertekegyseg"),
-                                doc.getLong("ar").intValue(),
-                                doc.getLong("img").intValue(),
-                                arudb.containsKey(doc.getString("nev")) ? arudb.get(doc.getString("nev")) : 0);
-                        aruk.add(item);
-                    } catch (Exception e) {
-                        System.out.println(doc);
-                    }
-                }
-                madapter.notifyDataSetChanged();
-            });
+            switch (sortby) {
+                case 0:
+                    mItems.orderBy("nev").get().addOnSuccessListener(this::fillData);
+                    break;
+                case 1:
+                    mItems.orderBy("nev", Query.Direction.DESCENDING).get().addOnSuccessListener(this::fillData);
+                    break;
+                case 2:
+                    mItems.orderBy("ar").get().addOnSuccessListener(this::fillData);
+                    break;
+                case 3:
+                    mItems.orderBy("ar", Query.Direction.DESCENDING).get().addOnSuccessListener(this::fillData);
+                    break;
+            }
+
         }else{
             for(aruModell aru: aruk){
                 aru.setDarab(arudb.containsKey(aru.getNev()) ? arudb.get(aru.getNev()) : 0);
                 madapter.notifyDataSetChanged();
             }
         }
+    }
+
+
+
+
+    private void fillData(QuerySnapshot queryDocumentSnapshots) {
+        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+            aruk.add(new aruModell(
+                    document.getString("nev"),
+                    document.getString("mertekegyseg"),
+                    document.getLong("ar").intValue(),
+                    aruImages.get(document.getString("nev")),
+                    arudb.containsKey(document.getString("nev")) ? arudb.get(document.getString("nev")) : 0
+            ));
+        }
+        madapter.notifyDataSetChanged();
     }
 
     private void setupModels(){
@@ -185,9 +226,15 @@ public class ShopActivity extends baseActivity {
                     nevek[i],
                     mertekegysegek[i],
                     arak[i],
-                    aruImages[i],
+                    aruImages.get(nevek[i]),
                     0));
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        aruk.clear();
     }
 }
