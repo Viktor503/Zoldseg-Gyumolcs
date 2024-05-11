@@ -16,6 +16,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ShopActivity extends baseActivity {
@@ -29,7 +30,7 @@ public class ShopActivity extends baseActivity {
 
     aruRecyclerViewAdapter madapter;
 
-    int[] arudb = {};
+    HashMap<String, Integer> arudb = new HashMap<>();
     int[] aruImages = {
             R.drawable.ban_n,
             R.drawable.burgonya,
@@ -95,19 +96,24 @@ public class ShopActivity extends baseActivity {
 
     void getdbfromCart(ArrayList<aruModell> cart){
         String[] nevek = getResources().getStringArray(R.array.gyumolcszoldsegnevek);
-        int[] db = new int[nevek.length];
+        if(cart.size()==0){
+            for(String nev: nevek){
+                arudb.put(nev, 0);
+            }
+            return;
+        }
+
         for(int i=0; i<nevek.length; i++){
             for(aruModell aru: cart){
                 if(aru.getNev().equals(nevek[i])){
-                    db[i] = aru.getDarab();
+                    arudb.put(aru.getNev(), aru.getDarab());
                     break;
                 }
                 if(aru == cart.get(cart.size()-1)){
-                    db[i] = 0;
+                    arudb.put(nevek[i], 0);
                 }
             }
         }
-        arudb = db;
     }
 
     @Override
@@ -140,32 +146,37 @@ public class ShopActivity extends baseActivity {
 
     }
 
-    private void queryData(){
-        aruk.clear();
-
-        mItems.orderBy("nev").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
-                try {
-                    aruModell item = new aruModell(doc.getString("nev"),
-                            doc.getString("mertekegyseg"),
-                            doc.getLong("ar").intValue(),
-                            doc.getLong("img").intValue(),
-                            arudb[0]);
-                    aruk.add(item);
-                }catch (Exception e){
-                    System.out.println(doc);
+    private void queryData() {
+        if (aruk.size() == 0) {
+            mItems.orderBy("nev").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                    try {
+                        aruModell item = new aruModell(doc.getString("nev"),
+                                doc.getString("mertekegyseg"),
+                                doc.getLong("ar").intValue(),
+                                doc.getLong("img").intValue(),
+                                arudb.containsKey(doc.getString("nev")) ? arudb.get(doc.getString("nev")) : 0);
+                        aruk.add(item);
+                    } catch (Exception e) {
+                        System.out.println(doc);
+                    }
                 }
+                madapter.notifyDataSetChanged();
+            });
+        }else{
+            for(aruModell aru: aruk){
+                aru.setDarab(arudb.containsKey(aru.getNev()) ? arudb.get(aru.getNev()) : 0);
+                madapter.notifyDataSetChanged();
             }
-            madapter.notifyDataSetChanged();
-        });
+        }
     }
 
     private void setupModels(){
         aruk.clear();
         String[] nevek = getResources().getStringArray(R.array.gyumolcszoldsegnevek);
         String[] mertekegysegek = getResources().getStringArray(R.array.gyumolcszoldsegmertekegyseg);
-        if(arudb.length == 0){
-            arudb = new int[nevek.length];
+        if(arudb.size() == 0){
+            arudb = new HashMap<>();
         }
 
         int[] arak = getResources().getIntArray(R.array.gyumocszoldsegarak);
@@ -175,7 +186,7 @@ public class ShopActivity extends baseActivity {
                     mertekegysegek[i],
                     arak[i],
                     aruImages[i],
-                    arudb[i]));
+                    0));
         }
 
     }

@@ -49,4 +49,8 @@ public class aruModell {
     public int getDarab() {
         return darab;
     }
+
+    public void setDarab(int i) {
+        darab = i;
+    }
 }

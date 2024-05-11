@@ -67,6 +67,7 @@ public class cartActivity extends baseActivity {
 
         List<aruModell> a = aruViewModel.getAruk().getValue();
         aruViewModel.getAruk().observe(this, new Observer<List<aruModell>>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onChanged(List<aruModell> aruModells) {
                         aruk = (ArrayList<aruModell>) aruModells;
@@ -137,7 +138,7 @@ public class cartActivity extends baseActivity {
     }
 
     private void setAlarmManager(){
-        long arrivaltime = (long) (AlarmManager.INTERVAL_HALF_HOUR*(Math.random()/2.5)+0.8);
+        long arrivaltime = (long) (AlarmManager.INTERVAL_HALF_HOUR*((Math.random()/2.5)+0.8));
         long triggerTime = System.currentTimeMillis() + arrivaltime;
         Intent intent = new Intent(this, AlarmReceiver.class);
         @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE);
