@@ -44,14 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Szállítási költség: " />
+                android:text="@string/sz_ll_t_si_k_lts_g" />
 
             <TextView
                 android:id="@+id/osszeskoltseg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Termékek ára költség: " />
+                android:text="@string/term_kek_ra_k_lts_g" />
 
             <View
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Végösszeg: " />
+                android:text="@string/v_g_sszeg" />
 
             <Button
                 android:id="@+id/deleteCart"
@@ -73,7 +73,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/design_default_color_error"
-                android:text="Kosár törlése"
+                android:text="@string/kos_r_t_rl_se"
 
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/orderCart"
@@ -88,7 +88,7 @@
 
                 android:background="#336600"
 
-                android:text="Megrendelés"
+                android:text="@string/megrendel_s"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

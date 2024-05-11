@@ -37,6 +37,8 @@ public class ShopActivity extends baseActivity {
     Spinner spinner;
 
     int sortby = 0;
+
+    boolean currently_requesting = false;
     HashMap<String, Integer> arudb = new HashMap<>();
     HashMap<String, Integer> aruImages = new HashMap<String, Integer>(){{
         put("banán",R.drawable.ban_n);
@@ -147,7 +149,6 @@ public class ShopActivity extends baseActivity {
                 aruk.clear();
                 getdbfromCart(cart);
                 sortby = i;
-                System.out.println("sortby: "+sortby);
                 queryData();
                 madapter.setAruk(aruk);
             }
@@ -172,7 +173,8 @@ public class ShopActivity extends baseActivity {
     }
 
     private void queryData() {
-        if (aruk.size() == 0) {
+        if (aruk.size() == 0 && !currently_requesting) {
+            currently_requesting = true;
             switch (sortby) {
                 case 0:
                     mItems.orderBy("nev").get().addOnSuccessListener(this::fillData);
@@ -210,6 +212,7 @@ public class ShopActivity extends baseActivity {
             ));
         }
         madapter.notifyDataSetChanged();
+        currently_requesting = false;
     }
 
     private void setupModels(){

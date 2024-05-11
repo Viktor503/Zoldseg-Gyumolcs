@@ -7,8 +7,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string-array name="rendezes">
-        <item>Név szerint növekvő</item>
-        <item>Név szerint csökkenő</item>
+        <item>ABC szerint növekvő</item>
+        <item>ABC szerint csökkenő</item>
         <item>Ár szerint növekvő</item>
         <item>Ár szerint csökkenő</item>
     </string-array>
@@ -205,4 +205,16 @@
     <string name="bejelentkez_s">Bejelentkezés</string>
     <string name="ha_m_r_van_fi_kod_akkor_jelentkezz_be_itt">Ha már van fiókod akkor jelentkezz be itt!</string>
     <string name="ha_m_g_nincs_fi_kod_akkor_regisztr_lj_itt">Ha még nincs fiókod, akkor regisztrálj itt.</string>
+    <string name="sz_ll_t_si_k_lts_g">Szállítási költség:</string>
+    <string name="term_kek_ra_k_lts_g">Termékek ára költség:</string>
+    <string name="v_g_sszeg">Végösszeg:</string>
+    <string name="kos_r_t_rl_se">Kosár törlése</string>
+    <string name="megrendel_s">Megrendelés</string>
+    <string name="dv_zl_nk_a_z_lds_gesben">Üdvözlünk a zöldségesben!</string>
+    <string name="a_r_p_ra_kattintva_tudsz">A répára kattintva tudsz vásárolni.\nA megvásárolt termékeid a kosárba kerülnek.\nRendelés leadásához fiókot kell létrehoznod.</string>
+    <string name="minden_10000_ft_feletti_v_s_rl">Minden 10000 Ft feletti vásárlás esetén ingyenes házhozszállítás!</string>
+    <string name="j_eg_szs_ges_v_s_rl_st"><![CDATA[Jó, egészséges vásárlást kívánunk! <3]]></string>
+    <string name="kijelentkez_s">Kijelentkezés</string>
+    <string name="fi_k_t_rl_se">Fiók törlése</string>
+    <string name="rendez_si_sorrend">Rendezési sorrend:</string>
 </resources>
